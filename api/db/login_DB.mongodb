@@ -9,47 +9,46 @@ db.createCollection("productos", {
        $jsonSchema: {
           bsonType: "object",
           required: [ "_id","nombre", "precio", "imagen", "altura", "unidades", "descripcion" ],
-          title: "habitat Validation",
+          title: "productos Validation",
           properties: {
-             _id: {
-                bsonType: "int",
-                description: "'_id' debe ser un numero positivo",
-                pattern: "^[1-9][0-9]*$"
-             },
-             nombre: {
-                bsonType: "string",
-                description: "'nombre' puede contener letras y numeros pero no caracteres especiales",
-                pattern: "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+$",
-                maxLength: 100
-             },
-             precio: {
-                bsonType: "int",
-                description: "'precio' debe ser un numero positivo",
-                pattern: "^[1-9][0-9]*$",
-             },
-             imagen: {
-                bsonType: "string",
-                description: "'imagen' puede contener letras y numeros pero no caracteres especiales",
-                maxLength: 600
-             },
-             altura: {
-                bsonType: "string",
-                description: "'altura' ser una unidad de metros cuadrados",
-                pattern: "^[0-9]+[mM]$",
-                maxLength: 20
-             },
-             unidades: {
-                bsonType: "int",
-                description: "'unidades' debe ser un numero positivo",
-                pattern: "^[1-9][0-9]*$",
-             },
-             descripcion: {
-                bsonType: "string",
-                description: "'descripcion' puede contener letras y numeros pero no caracteres especiales",  
-                pattern: "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ,.\s]+$",
-                maxLength: 600
-             }
+            _id: {
+               bsonType: "number",
+               description: "'_id' debe ser un número",
             },
+            nombre: {
+               bsonType: "string",
+               description: "'nombre' puede contener letras y números pero no caracteres especiales",
+               pattern: "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+$",
+               maxLength: 100
+            },
+            precio: {
+               bsonType: "number",
+               description: "'precio' debe ser un número positivo",
+               minimum: 0
+            },
+            imagen: {
+               bsonType: "string",
+               description: "'imagen' puede contener letras y números pero no caracteres especiales",
+               maxLength: 600
+            },
+            altura: {
+               bsonType: "string",
+               description: "'altura' debe ser una cadena que representa una unidad de metros cuadrados",
+               pattern: "^[0-9]+(\.[0-9]+)?[mM]$",
+               maxLength: 20
+            },
+            unidades: {
+               bsonType: "number",
+               description: "'unidades' debe ser un número positivo",
+               minimum: 0
+            },
+            descripcion: {
+               bsonType: "string",
+               description: "'descripcion' puede contener letras y números pero no caracteres especiales",  
+               pattern: "^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ,.\s]+$",
+               maxLength: 600
+            }
+        },
             additionalProperties: false
          }
      },
