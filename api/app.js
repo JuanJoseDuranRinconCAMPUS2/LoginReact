@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 import express from "express";
-import cors from "cors";
 
 console.clear();
 dotenv.config({ path: `./api/.env` });
@@ -8,7 +7,7 @@ dotenv.config({ path: `./api/.env` });
 const loginApi = express();
 loginApi.use(express.json());
 
-//Logion
+//Login
 // ════════ ⋆★⋆ ════════
 
 // ════════ ⋆★⋆ ════════
