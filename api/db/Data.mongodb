@@ -1,0 +1,109 @@
+//}🚧🦊Creacion de la coleccion del manejo de autoincrementables🔗🚧
+
+use("login_DB");
+db.createCollection("autoincrement");
+db.autoincrement.insertMany([
+    { _id: "productosId", sequence_value: 0 }
+]);
+
+use("login_DB");
+function increment(coleccion) {
+    const sequenceDocument = db.autoincrement.findOneAndUpdate(
+        { _id: `${coleccion}Id` },
+        { $inc: { sequence_value: 1 } },
+        { returnDocument: "after" }
+    );
+    return sequenceDocument.sequence_value;
+  }
+db.productos.insertMany([
+    {
+      _id: Number(increment("productos")),
+      nombre: "lampara hogar",
+      precio: 23000,
+      imagen: "https://http2.mlstatic.com/D_NQ_NP_652697-MLU71146856409_082023-O.webp",
+      altura: "0.40m",
+      unidades: 1200,
+      descripcion: " La lámpara de escritorio Mesa Cuello Flexible es el complemento perfecto para tu espacio de trabajo. Con su diseño moderno y elegante, esta lámpara de la marca Exito Corp se adapta a cualquier estilo de decoración. Su estructura de metal en color negro le brinda estabilidad y durabilidad, mientras que su pantalla de aluminio garantiza una iluminación suave y uniforme."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Mesa Para Tv Tunez",
+        precio: 199900,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_847276-MCO50723994053_072022-F.webp",
+        altura: "1.6m",
+        unidades: 500,
+        descripcion: "son productos con diseños modernos y medidas estándar de fábrica, se fabrican en volumen, utilizamos materiales de calidad, esto permite ofrecer precios increíbles, llegan empacados en caja y requieren ser armados por nuestros clientes, cuentan con garantía y manejamos diseños modernos."  
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Escritorio RTA Muebles Astana",
+        precio: 189900,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_617468-MLA50417982845_062022-F.webp",
+        altura: "1.2m",
+        unidades: 1440,
+        descripcion: "Ya sea para estudiar o trabajar, este escritorio RTA Muebles te ayudará a crear un ambiente confortable y sumar orden y funcionalidad a tus horas productivas. Su superficie no sólo te servirá de apoyo, sino que te permitirá tener los recursos al alcance de la mano para facilitar tus tareas."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Disco duro externo Toshiba 1TB negro",
+        precio: 191900,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_828440-MLA40152365365_122019-F.webp",
+        altura: "0.03m",
+        unidades: 2500,
+        descripcion: "Si estás buscando un disco duro para mejorar el rendimiento de tu equipo, el Toshiba HDTB410XK3AA es justo lo que necesitas. Al ser HDD, su practicidad y valor económico respecto a otros tipos de discos marcan la diferencia."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Audífonos Logitech H390",
+        precio: 108888,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_878789-MLA40161268975_122019-F.webp",
+        altura: "0.03m",
+        unidades: 1470,
+        descripcion: "En la calle, en el colectivo o en la oficina, ten siempre a mano tus audífonos Logitech y escápate de la rutina por un rato, Vas a poder disfrutar de la música que más te gusta y de tus podcasts favoritos cuando quieras y donde quieras."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Soporte North Bayou",
+        precio: 109900,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_928102-MLA51718089750_092022-F.webp",
+        altura: "1m",
+        unidades: 500,
+        descripcion: "North Bayou es una empresa especializada en la fabricación de soportes para todo tipo de pantallas. Su gran capacidad en el desarrollo y diseño de productos funcionales, enfocados en seguridad, calidad y estética la posicionan a nivel mundial."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Mouse Pad gamer Aoas",
+        precio: 46250,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_895664-MLA48636966259_122021-F.webp",
+        altura: "0.3m",
+        unidades: 5222,
+        descripcion: "Es tan fácil deslizar el mouse. Con tu Aoas S4000 podrás llenar la pantalla de tu ordenador de clicks. Su elaborada superficie le dará precisión y comodidad a tus movimientos."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Audífonos in ear inalámbricos",
+        precio: 26000,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_938092-MLA45480677826_042021-F.webp",
+        altura: "0.3m",
+        unidades: 1245,
+        descripcion: "En la calle, en el autobús o en la oficina, mantén contigo siempre los auriculares F9 5 y escapa de la monotonía por un tiempo Disfruta de tus canciones favoritas y podcasts cuando quieras y donde quieras."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Mouse gamer inalámbrico Logitech",
+        precio: 169300,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_977588-MLA51172463642_082022-F.webp",
+        altura: "0.016m",
+        unidades: 1600,
+        descripcion: "Los dispositivos Logitech cuentan con un diseño ergonómico pensado para tu confort. Lightspeed es una tecnología ultrarrápida y confiable con desempeño probado en competencias por profesionales. No vuelvas a preocuparte por la duración de la batería. Simplemente, el mouse se mantiene cargado."
+    },
+    {
+        _id: Number(increment("productos")),
+        nombre: "Silla de escritorio Femmto GE002",
+        precio: 735900,
+        imagen: "https://http2.mlstatic.com/D_NQ_NP_2X_834146-MLA54264553461_032023-F.webp",
+        altura: "0.45m",
+        unidades: 11,
+        descripcion: "Diseñada para quienes pasan muchas horas frente a la computadora. El asiento y el respaldo se adaptan a tus diferentes posiciones a lo largo del juego. Disfruta sin descuidar las zonas lumbar, dorsal y cervical"
+    }
+]);
