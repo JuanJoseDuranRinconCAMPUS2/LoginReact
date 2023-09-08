@@ -13,7 +13,7 @@ export const vProductos = [
     .isNumeric().withMessage("precio_Producto debe ser un numero")
     .custom(value => {
         if (parseInt(value) <= 0 || !(typeof value == "number")) {
-            throw new Error("precio_Producto debe ser un número positivo");
+            throw new Error("precio_Producto debe ser un número positivo")
         }
         return true;
     }),
@@ -21,7 +21,7 @@ export const vProductos = [
     body("url_img_Producto")
     .notEmpty().withMessage("url_img_Producto no debe estar vacio")
     .isString().withMessage("url_img_Producto debe ser un string")
-    .isLength({ max: 600 }).withMessage("url_img_Producto debe tener máximo 600 caracteres"),,
+    .isLength({ max: 600 }).withMessage("url_img_Producto debe tener máximo 600 caracteres"),
 
     body("altura_Producto")
     .notEmpty().withMessage("altura_Producto no debe estar vacio")
