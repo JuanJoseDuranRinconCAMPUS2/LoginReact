@@ -39,9 +39,9 @@ export const vProductos = [
         return true;
     }),
 
-    body("lugar_conserva_Ali")
-    .notEmpty().withMessage("lugar_conserva_Ali no debe estar vacio")
-    .isString().withMessage("lugar_conserva_Ali debe ser un string")
-    .matches(/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ,.\s]+$/).withMessage("lugar_conserva_Ali solo puede contener caracteres alfanuméricos, espacios y caracteres acentuados específicos ")
-    .isLength({ max: 600 }).withMessage("lugar_conserva_Ali debe tener máximo 600 caracteres")
+    body("descripcion_Producto")
+    .notEmpty().withMessage("descripcion_Producto no debe estar vacio")
+    .isString().withMessage("descripcion_Producto debe ser un string")
+    .matches(/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ,.\s]+$/).withMessage("descripcion_Producto solo puede contener caracteres alfanuméricos, espacios y caracteres acentuados específicos ")
+    .isLength({ max: 600 }).withMessage("descripcion_Producto debe tener máximo 600 caracteres")
 ]
