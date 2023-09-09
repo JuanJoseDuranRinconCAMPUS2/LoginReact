@@ -1,6 +1,6 @@
 import dotnev from "dotenv";
 import { MongoClient } from "mongodb";
-dotnev.config( `../api/.env`);
+dotnev.config({ path: `./api/.env` });
 export async function con() {
     try {
         const uri = `mongodb+srv://${process.env.Atlas_User}:${process.env.Atlas_Password}@cluster0.ayssvt3.mongodb.net/${process.env.Atlas_DB}`;
