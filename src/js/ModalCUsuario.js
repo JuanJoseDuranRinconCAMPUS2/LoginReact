@@ -13,7 +13,7 @@ export let modalError = async (response)=>{
     let p1 = response
     let responseAPI = p1.data;
     let errorElements = null;
-    
+
     if (responseAPI.errors) {
         errorElements = responseAPI.errors.map(error => `
         <h4>Error Type: ${error.type}</h4>
@@ -35,6 +35,33 @@ export let modalError = async (response)=>{
     `
 
     modalError.insertAdjacentHTML("beforeend", modalE)
+   
+    modal.classList.add('modal--show');
+}
+
+export let modalSendUser = async (response)=>{
+    
+    const modalUser = document.querySelector(".modal_Info");
+    const modal= document.querySelector(".modal");
+
+    while (modalUser.firstChild) {
+        modalUser.removeChild(modalUser.firstChild);
+    }
+
+    let p1 = response
+    let responseAPI = p1.data;
+
+    const modalU = `
+        <h2 className="modal__title">User successfully created!</h2>
+        <h4>${p1.status}</h4>
+        <h4>${p1.statusText}</h4>
+        <img src="https://64.media.tumblr.com/174efc47788507c5dbf84b597dddcee2/tumblr_o7b4bgHu6L1qciqqno3_640.gif" className="modal__img" alt="Imagen del modal" width="100%"/>
+        <h4>Message:</h4>
+        <p className="modal__paragraph">${(responseAPI.message) ? responseAPI.message : "No errors in credentials"}</p>
+        <p className="modal__paragraph">Remember your username and password</p>
+    `
+
+    modalUser.insertAdjacentHTML("beforeend", modalU)
    
     modal.classList.add('modal--show');
 }
