@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Formulary from './Formulary'
+import FormCUsuario from './components/formCUsuario'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+let app = document.querySelector('#root')
+ReactDOM.createRoot(app).render(
   <React.StrictMode>
-    <Formulary/>
+    <FormCUsuario/>
   </React.StrictMode>,
 )
+
 
 
