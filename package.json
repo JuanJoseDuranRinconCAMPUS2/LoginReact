@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.1.0",
   "type": "module",
+  "proxy": "http://127.19.8.7:5010",
   "scripts": {
     "dev": "vite",
     "start": "nodemon --quiet ./api/app.js",
@@ -11,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -18,7 +20,7 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "cors": "2.8.5",
+    "cors": "^2.8.5",
     "dotenv": "16.3.1",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
