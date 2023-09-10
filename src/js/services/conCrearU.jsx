@@ -1,5 +1,6 @@
 import axios from "axios";
 import { modalError } from "../ModalCUsuario";
+import { modalSendUser } from "../ModalCUsuario";
 
 const config = {"hostname": "127.19.8.7", "port": 5010}
 
@@ -14,7 +15,7 @@ export let newUser = async (User)=>{
                 'Accept-Version': '1.1.0'
             }
         });
-        console.log(response);
+        modalSendUser(response);      
     }catch(error){
         modalError(error.response);
     }
