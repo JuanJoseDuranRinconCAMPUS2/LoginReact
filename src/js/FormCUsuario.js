@@ -1,5 +1,4 @@
 import { newUser } from '../js/services/conCrearU';
-import { globalResponse } from '../js/services/conCrearU';
 export let sendUser = async (User)=>{
     let { 
         Username:nombre_Usuario, email:correo_Usuario, 
