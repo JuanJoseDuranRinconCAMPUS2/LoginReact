@@ -1,4 +1,5 @@
 .modal{
+    overflow: auto;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,7 +26,7 @@
     margin: auto;
     width: 90%;
     max-width: 600px;
-    max-height: 90%;
+    max-height: 200%;
     background-color: #fff;
     border-radius: 6px;
     padding: 3em 2.5em;
