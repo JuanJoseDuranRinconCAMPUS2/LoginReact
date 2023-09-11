@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import FormCUsuario from './components/formCUsuario'
 import ModalCUsuario from './components/ModalCUsuario'
 import FormIUsuario from './components/FormIUsuario'
+import CardsProducts from './components/CardsProducts'
 
 let app = document.querySelector('#root')
 ReactDOM.createRoot(app).render(
@@ -24,5 +25,13 @@ ReactDOM.createRoot(appM).render(
     <ModalCUsuario/>
   </React.StrictMode>,
 )
+
+let appC = document.querySelector('#cards')
+ReactDOM.createRoot(appC).render(
+  <React.StrictMode>
+    <CardsProducts/>
+  </React.StrictMode>,
+)
+
 
 
