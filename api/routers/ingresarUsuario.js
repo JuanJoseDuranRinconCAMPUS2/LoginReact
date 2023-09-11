@@ -9,7 +9,7 @@ import { proxyIngresoUsu } from "../Middlewares/proxyPEndpoints.js";
 const AppIngresoUsuario = Router();
 const version = routesVersioning();
 
-AppIngresoUsuario.get('/', postAndPutLimit(235), proxyIngresoUsu, proxyExistUsuario, proxyValidateColeccion, version({
+AppIngresoUsuario.post('/', postAndPutLimit(235), proxyIngresoUsu, proxyExistUsuario, proxyValidateColeccion, version({
     "1.1.0": ingresarUsuv110
 }))
 
