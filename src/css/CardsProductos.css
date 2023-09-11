@@ -1,0 +1,78 @@
+main {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.card{
+    border-radius: 20px;
+    padding: 5px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    text-transform: uppercase;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    text-align: center;
+    align-content: center;
+    color: azure;
+}
+
+.card-Content{
+    background: rgb(5, 6, 45);
+    border-radius: 17px;
+    width: 100%;
+    height: 100%;
+}
+
+.card-imagen {
+    padding-inline: 1rem;
+    display: flex;
+    justify-content: center;
+}
+    
+.cardImg {
+    width: 40%; 
+    height: auto; 
+    max-width: 100%; 
+    max-height: 100%;
+    object-fit: cover; 
+}
+    
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding-inline: 1rem;
+    align-items: center;
+    text-align: center;
+}
+    
+.card-contenedor {
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+    
+.card-nombre {
+    font-size: 1.4rem;
+}
+
+@media screen and (min-width: 470px) {
+    .cards {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (min-width: 700px) {
+    .cards {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
