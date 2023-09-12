@@ -242,3 +242,61 @@ db.usuario_Api.insertMany([
     }
 ]);
   
+
+//🚧🧧Creacion de la coleccion passwordCode🧧🚧
+use("login_DB");
+db.createCollection("passwordCode", {
+    validator: {
+        $jsonSchema: {
+           bsonType: "object",
+           required: [ 
+                "_id",
+                "name",
+                "email",
+                "createdAt",
+                "recovery_Code"
+            ],
+           title: "passwordCode Validation",
+           properties: {
+                _id: { 
+                    bsonType: "objectId" , 
+                    description: "'_id' must be a valid ObjectId"
+                },
+
+                name: { 
+                    bsonType: "string" , 
+                    description: "'name' must be of type string with letters and numbers.",
+                    pattern: "^[a-zA-Z0-9 ]+$",
+                    maxLength: 255
+                },
+
+                email: { 
+                    bsonType: "string" , 
+                    pattern : "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$",
+                    description: "'email' must be an email of less than 255 characters",
+                    maxLength: 255
+                },
+
+                createdAt: {
+                    bsonType: "date",
+                    description: "'createdAt' must be an Date",
+                },
+
+                recovery_Code: { 
+                    bsonType: "string" , 
+                    description: "'recovery_Code' must be of type string of less than 5 characters",
+                    maxLength: 5
+                }
+           },
+           additionalProperties: false
+        }
+    },
+    validationAction: "error",
+    validationLevel: "strict"
+});
+
+use("login_DB");
+db.passwordCode.createIndex({ name: 1 }, { unique: true });
+db.passwordCode.createIndex({ email: 1 }, { unique: true });
+db.passwordCode.createIndex({ createdAt: 1 }, { expireAfterSeconds: 900 })
+
