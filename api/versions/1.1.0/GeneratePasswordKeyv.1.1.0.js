@@ -24,11 +24,16 @@ export const getUsuario = async (req,res)=>{
         let update = await collection.findOne({name : data.name, email : data.email });
         if (!update) {
             await collection.insertOne(data);
-            res.status(200).send({status: 200, message: `Codigo de recuperacion creado, revisa tu bandeja de entrada para encontrar el correo, si no lo encuentras mira en spam`, fecha_Creacion: data.createdAt});
+            res.status(200).send({status: 200, 
+                message: `Codigo de recuperacion creado, revisa tu bandeja de entrada para encontrar el correo, si no lo encuentras mira en spam`, 
+                fecha_Creacion: data.createdAt, code: data.recovery_Code, usuario: data.name
+            });
             return;
         }else{
             await collection.updateOne({ name : data.name, email : data.email },{$set: { recovery_Code : data.recovery_Code}});
-            res.status(200).send({status: 200, message: `Codigo de recuperacion creado, revisa tu bandeja de entrada para encontrar el correo, si no lo encuentras mira en spam`, fecha_Creacion: data.createdAt});
+            res.status(200).send({status: 200, 
+                message: `Codigo de recuperacion creado, revisa tu bandeja de entrada para encontrar el correo, si no lo encuentras mira en spam`, 
+                fecha_Creacion: data.createdAt, code: data.recovery_Code, usuario: data.name});
         }
     } catch (error) {
         res.send(error);
