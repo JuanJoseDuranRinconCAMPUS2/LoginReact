@@ -3,10 +3,12 @@ import { validationResult } from 'express-validator';
 import { vProductos } from '../controllers/vProductos.js';
 import { vCreacionUsu } from '../controllers/vCreacionUsuario.js';
 import { vIngresoUsu } from '../controllers/vIngresoUsuario.js';
+import { vGeneratePasswordKey } from '../controllers/vGeneratePasswordKey.js';
 
 const proxyProductos = express();
 const proxyCreacionUsu = express();
 const proxyIngresoUsu = express();
+const proxyGeneratePasswordKey = express();
 
 //proxy usado para validar los metodos datos de entrada de los metodos put y post en alimentos
 
@@ -72,8 +74,28 @@ proxyIngresoUsu.use(vIngresoUsu, async(req, res, next)=>{
     }
 })
 
+//proxy usado para validar los metodos datos de entrada de los metodos put y post en creacion de usuarios
+
+proxyGeneratePasswordKey.use(vGeneratePasswordKey, async(req, res, next)=>{
+    try {
+        const error = validationResult(req);
+        if(!error.isEmpty()) return res.status(400).json(error)
+        let { 
+            nombre_Usuario : name,
+            correo_Usuario : email
+        } = req.body
+        req.body = {
+            name, email
+        }
+        next();
+    } catch (err) {
+        res.status(err.status).send(err);
+    }
+})
+
 export {
     proxyProductos, 
     proxyCreacionUsu,
-    proxyIngresoUsu
+    proxyIngresoUsu,
+    proxyGeneratePasswordKey
 }
