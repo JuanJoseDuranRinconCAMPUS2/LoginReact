@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
 import { validateUser } from '../js/FormIUsuario';
 import { viewRoot } from '../js/changeView';
+import { viewPassword } from '../js/changeView';
 import '../css/style.css'
 
 export default function FormIUsuario() {
@@ -12,6 +13,7 @@ export default function FormIUsuario() {
         const password = document.querySelector("#passwordI");
         const showPasswordButton = document.querySelector("#showPasswordButtonI");
         const signUpHy = document.querySelector("#signUp");
+        const forgotPW = document.querySelector("#forgotPW");
     
         divLogin.style.display = "block";
 
@@ -25,6 +27,11 @@ export default function FormIUsuario() {
         const eventoSingUp = (e) => {
             e.preventDefault();
             viewRoot();
+        }
+
+        const eventoForgotPW = (e) => {
+            e.preventDefault();
+            viewPassword();
         }
 
         const eventoPassword = () => {
@@ -58,6 +65,9 @@ export default function FormIUsuario() {
         if (signUpHy) {
             signUpHy.addEventListener('click', eventoSingUp);
         }
+        if (forgotPW) {
+            forgotPW.addEventListener('click', eventoForgotPW);
+        }
         return () => {
             if (login) {
                 login.removeEventListener('submit', eventoSubmit);
@@ -67,6 +77,9 @@ export default function FormIUsuario() {
             }
             if (signUpHy) {
                 signUpHy.removeEventListener('click', eventoSingUp);
+            }
+            if (forgotPW) {
+                forgotPW.removeEventListener('click', eventoForgotPW);
             }
         };
     }, []);
@@ -92,7 +105,7 @@ export default function FormIUsuario() {
                         <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                 </svg></button>
                 <span className="span">
-                    <a href="#">Forgot password?</a>
+                    <a href="#" id='forgotPW'>Forgot password?</a>
                     </span>
                     <button className="button" type="submit" value="Log in"> Send</button>
                     <span className="span">
