@@ -65,3 +65,29 @@ export let modalSendUser = async (response)=>{
    
     modal.classList.add('modal--show');
 }
+
+export let modalSendEmail = async (response)=>{
+    
+    const modalUser = document.querySelector(".modal_Info");
+    const modal= document.querySelector(".modal");
+
+    while (modalUser.firstChild) {
+        modalUser.removeChild(modalUser.firstChild);
+    }
+
+    let p1 = response
+
+    const modalU = `
+        <h2 className="modal__title">verification code!</h2>
+        <h4>hello dear user:</h4>
+        <h4>${p1.usuario}</h4>
+        <img src="https://i.gifer.com/QHTn.gif" className="modal__img" alt="Imagen del modal" width="100%"/>
+        <h4>Message:</h4>
+        <p className="modal__paragraph">You have requested a password recovery, your verification code has been sent to the email ${p1.email}, remember to check your spam folder if you can't find the email.</p>
+        <p className="modal__paragraph">The code in the mail is valid for 15 minutes!</p>
+    `
+
+    modalUser.insertAdjacentHTML("beforeend", modalU)
+   
+    modal.classList.add('modal--show');
+}
