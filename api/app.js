@@ -5,6 +5,7 @@ import Producto from './routers/Producto.js'
 import AppCrearUsuario from './routers/crearUsuarios.js';
 import AppIngresoUsuario from './routers/ingresarUsuario.js';
 import AppGeneratePasswordKey from "./routers/GeneratePasswordKey.js";
+import AppRecoveryPassword from "./routers/recoveryPassword.js";
 
 console.clear();
 dotenv.config({ path: `./api/.env` });
@@ -29,6 +30,7 @@ loginApi.use(cors({
 loginApi.use('/CrearUsuario', AppCrearUsuario);
 loginApi.use('/IngresarUsuario', AppIngresoUsuario);
 loginApi.use('/GeneratePasswordKey', AppGeneratePasswordKey);
+loginApi.use('/RecoveryPassword', AppRecoveryPassword);
 // ════════ ⋆★⋆ ════════
 
 //Endpoint
