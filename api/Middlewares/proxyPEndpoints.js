@@ -4,11 +4,13 @@ import { vProductos } from '../controllers/vProductos.js';
 import { vCreacionUsu } from '../controllers/vCreacionUsuario.js';
 import { vIngresoUsu } from '../controllers/vIngresoUsuario.js';
 import { vGeneratePasswordKey } from '../controllers/vGeneratePasswordKey.js';
+import { vRecoveryPassword } from '../controllers/vRecoveryPassword.js';
 
 const proxyProductos = express();
 const proxyCreacionUsu = express();
 const proxyIngresoUsu = express();
 const proxyGeneratePasswordKey = express();
+const proxyRecoveryPassword = express();
 
 //proxy usado para validar los metodos datos de entrada de los metodos put y post en alimentos
 
@@ -54,7 +56,7 @@ proxyCreacionUsu.use(vCreacionUsu, async(req, res, next)=>{
     }
 })
 
-//proxy usado para validar los metodos datos de entrada de los metodos put y post en creacion de usuarios
+//proxy usado para validar los metodos datos de entrada en el ingreso de usuarios
 
 proxyIngresoUsu.use(vIngresoUsu, async(req, res, next)=>{
     try {
@@ -74,7 +76,7 @@ proxyIngresoUsu.use(vIngresoUsu, async(req, res, next)=>{
     }
 })
 
-//proxy usado para validar los metodos datos de entrada de los metodos put y post en creacion de usuarios
+//proxy usado para validar los metodos datos de entrada en la generacion de los codigos de recuperacion de contraseña
 
 proxyGeneratePasswordKey.use(vGeneratePasswordKey, async(req, res, next)=>{
     try {
@@ -93,9 +95,31 @@ proxyGeneratePasswordKey.use(vGeneratePasswordKey, async(req, res, next)=>{
     }
 })
 
+//proxy usado para validar los metodos datos de entrada en la validacion de los codigos de recuperacion de contraseña y ademas la actualizacion de contraseña
+
+proxyRecoveryPassword.use(vRecoveryPassword, async(req, res, next)=>{
+    try {
+        const error = validationResult(req);
+        if(!error.isEmpty()) return res.status(400).json(error)
+        let { 
+            nombre_Usuario : name,
+            correo_Usuario : email,
+            contraseña_Usuario: newPassword,
+            code_Recuperacion: recoveryCode
+        } = req.body
+        req.body = {
+            name, email, newPassword, recoveryCode
+        }
+        next();
+    } catch (err) {
+        res.status(err.status).send(err);
+    }
+})
+
 export {
     proxyProductos, 
     proxyCreacionUsu,
     proxyIngresoUsu,
-    proxyGeneratePasswordKey
+    proxyGeneratePasswordKey,
+    proxyRecoveryPassword
 }
