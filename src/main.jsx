@@ -1,22 +1,38 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import FormCUsuario from './components/FormCUsuario'
 import ModalCUsuario from './components/ModalCUsuario'
 import FormIUsuario from './components/FormIUsuario'
 import CardsProducts from './components/CardsProducts'
 import FormRecoveryPW from './components/FormRecoveryPW'
 
+
+const root = createBrowserRouter([
+  {
+    path: "/",
+    element: <FormIUsuario/>,
+    children: [
+      {
+        path: "/content",
+        element: <CardsProducts/>
+      }
+    ]
+  },
+  {
+    path: "/SingUp",
+    element: <FormCUsuario/>,
+  },
+  {
+    path: "/recoveryPassword",
+    element: <FormRecoveryPW/>,
+  }
+]);
+
 let app = document.querySelector('#root')
 ReactDOM.createRoot(app).render(
   <React.StrictMode>
-    <FormCUsuario/>
-  </React.StrictMode>,
-)
-
-let appL = document.querySelector('#login')
-ReactDOM.createRoot(appL).render(
-  <React.StrictMode>
-    <FormIUsuario/>
+    <RouterProvider router={root}/>
   </React.StrictMode>,
 )
 
@@ -26,20 +42,4 @@ ReactDOM.createRoot(appM).render(
     <ModalCUsuario/>
   </React.StrictMode>,
 )
-
-let appC = document.querySelector('#cards')
-ReactDOM.createRoot(appC).render(
-  <React.StrictMode>
-    <CardsProducts/>
-  </React.StrictMode>,
-)
-
-let appR = document.querySelector('#formPassword')
-ReactDOM.createRoot(appR).render(
-  <React.StrictMode>
-    <FormRecoveryPW/>
-  </React.StrictMode>,
-)
-
-
 

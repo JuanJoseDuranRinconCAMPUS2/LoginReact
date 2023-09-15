@@ -8,9 +8,7 @@ export default function FormRecoveryPW() {
     useEffect(() => {
 
         const recovery = document.querySelector(".formRecovery");
-        const divPassword = document.querySelector("#formPassword");
 
-        divPassword.style.display = "none";
 
         const eventoSubmit = (e) => {
             e.preventDefault();

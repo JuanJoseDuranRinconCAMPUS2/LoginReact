@@ -3,8 +3,7 @@
 export let MakeCards = async (response)=>{
     
     const cards = document.querySelector(".cards");
-    const modal= document.querySelector(".modal");
-    const divLogin = document.querySelector("#login");
+    const divLogin = document.querySelector("#loginUsers");
 
     divLogin.style.display = "none";
 

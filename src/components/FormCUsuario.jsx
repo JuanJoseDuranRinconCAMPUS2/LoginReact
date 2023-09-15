@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
+import { Link, Outlet } from 'react-router-dom'
 import { sendUser } from '../js/FormCUsuario';
-import { viewlogin } from '../js/changeView';
 import '../css/FormCUsuario.css'
 
 export default function FormCUsuario() {
@@ -10,18 +10,12 @@ export default function FormCUsuario() {
         const login = document.querySelector(".form");
         const password = document.querySelector("#password");
         const showPasswordButton = document.querySelector("#showPasswordButton");
-        const signInHy = document.querySelector("#signIn");
 
         const eventoSubmit = (e) => {
             e.preventDefault();
             let data = Object.fromEntries(new FormData(e.target));
             sendUser(data);
             login.reset();
-        }
-
-        const eventoSingIn = (e) => {
-            e.preventDefault();
-            viewlogin();
         }
 
         const eventoPassword = () => {
@@ -52,9 +46,6 @@ export default function FormCUsuario() {
         if (showPasswordButton) {
             showPasswordButton.addEventListener('click', eventoPassword);
         }
-        if (signInHy) {
-            signInHy.addEventListener('click', eventoSingIn);
-        }
         return () => {
             if (login) {
                 login.removeEventListener('submit', eventoSubmit);
@@ -62,52 +53,52 @@ export default function FormCUsuario() {
             if (showPasswordButton) {
                 showPasswordButton.removeEventListener('click', eventoPassword);
             }
-            if (signInHy) {
-                signInHy.removeEventListener('click', eventoSubmit);
-            }
         };
     }, []);
   
     return (
         <>
-            <h2 className='titleUserR'>Sign Up</h2>
-            <form className="form">
-                <span className="input-span">
-                    <label htmlFor="Username" className="label">
-                        Username
-                    </label>
-                    <input type="Username" name="Username" id="Username" required/>
-                </span>
-                <span className="input-span">
-                    <label htmlFor="email" className="label">
-                        Email
-                    </label>
-                    <input type="email" name="email" id="email" required/>
-                </span>
-                <span className="input-span">
-                    <label htmlFor="email" className="label">
-                        Rol
-                    </label>
-                    <select name="rol" id="rol" required>
-                        <option value="1">Admin</option>
-                        <option value="0">User</option>
-                    </select>
-                </span>
-                <span className="input-span">
-                    <label htmlFor="password" className="label">
-                        Password
-                    </label>
-                    <input type="password" name="password" id="password" required/>
-                </span>
-                <button type="button" className="button" id="showPasswordButton"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
-                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                </svg></button>
-                    <button className="button" type="submit" value="Log in"> Send</button>
-                    <span className="span">
-                    Have an account? <a href="#" id='signIn'>Sign in</a>
-                </span>
-        </form>
+            <div id='userCreation'>
+                <h2 className='titleUserR'>Sign Up</h2>
+                <form className="form">
+                    <span className="input-span">
+                        <label htmlFor="Username" className="label">
+                            Username
+                        </label>
+                        <input type="Username" name="Username" id="Username" required/>
+                    </span>
+                    <span className="input-span">
+                        <label htmlFor="email" className="label">
+                            Email
+                        </label>
+                        <input type="email" name="email" id="email" required/>
+                    </span>
+                    <span className="input-span">
+                        <label htmlFor="email" className="label">
+                            Rol
+                        </label>
+                        <select name="rol" id="rol" required>
+                            <option value="1">Admin</option>
+                            <option value="0">User</option>
+                        </select>
+                    </span>
+                    <span className="input-span">
+                        <label htmlFor="password" className="label">
+                            Password
+                        </label>
+                        <input type="password" name="password" id="password" required/>
+                    </span>
+                    <button type="button" className="button" id="showPasswordButton"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                    </svg></button>
+                        <button className="button" type="submit" value="Log in"> Send</button>
+                        <span className="span">
+                        Have an account? <Link to={`/`} id='Signin'>Sign in</Link>
+                    </span>
+            </form>
+        </div>
+        <Outlet/>
         </>
     )
 }
