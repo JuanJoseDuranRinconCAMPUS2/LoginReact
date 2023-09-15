@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
 import { Link, Outlet } from 'react-router-dom'
 import { validateUser } from '../js/FormIUsuario';
-import { viewRoot } from '../js/changeView';
 import { useNavigate } from 'react-router-dom';
 import '../css/style.css'
 
