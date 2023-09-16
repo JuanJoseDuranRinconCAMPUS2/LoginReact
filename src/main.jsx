@@ -6,7 +6,7 @@ import ModalCUsuario from './components/ModalCUsuario'
 import FormIUsuario from './components/FormIUsuario'
 import CardsProducts from './components/CardsProducts'
 import FormRecoveryPW from './components/FormRecoveryPW'
-
+import FormNewPassword from './components/FormNewPassword'
 
 const root = createBrowserRouter([
   {
@@ -26,6 +26,12 @@ const root = createBrowserRouter([
   {
     path: "/recoveryPassword",
     element: <FormRecoveryPW/>,
+    children: [
+      {
+        path: "NewPasswordVerification",
+        element: <FormNewPassword/>
+      }
+    ]
   }
 ]);
 
