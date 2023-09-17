@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { validateUser } from '../js/FormIUsuario';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import '../css/style.css'
 
 
 export default function FormIUsuario() {
     const navigate = useNavigate();
-   
+    const {register, handleSubmit} = useForm();
+
     useEffect(() => {
         const divForm = document.querySelector("#loginUsers");
         divForm.style.display = "block";
@@ -19,9 +20,10 @@ export default function FormIUsuario() {
         
         const eventoSubmit = (e) => {
             e.preventDefault();
-            let data = Object.fromEntries(new FormData(e.target));
-            validateUser(data);
-            navigate('/content');
+             handleSubmit((data) => {
+                validateUser(data);
+                navigate('/content');
+            })();
             login.reset();
         }
 
@@ -73,13 +75,13 @@ export default function FormIUsuario() {
                         <label htmlFor="Username" className="label">
                             Username
                         </label>
-                        <input type="Username" name="UsernameI" id="UsernameI" required/>
+                        <input {...register("UsernameI")} type="text" name="UsernameI" id="UsernameI" required/>
                     </span>
                     <span className="input-span">
                         <label htmlFor="password" className="label">
                             Password
                         </label>
-                        <input type="password" name="passwordI" id="passwordI" required/>
+                        <input {...register("passwordI")} type="password" name="passwordI" id="passwordI" required/>
                     </span>
                     <button type="button" className="button" id="showPasswordButtonI"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
