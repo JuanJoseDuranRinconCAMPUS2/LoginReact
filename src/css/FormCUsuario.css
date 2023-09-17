@@ -72,6 +72,12 @@ form select:focus {
   font-weight: 600;
 }
   
+.ErrorMessage {
+  border: 2px solid #58BC82;
+  caret-color: #fa4753;
+  color: #fa4753;
+  box-shadow: 4px 4px 10px #070707;
+}
 
 .button {
   --color: #00A97F;
