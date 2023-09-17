@@ -8,8 +8,8 @@ import '../css/style.css'
 
 export default function FormIUsuario() {
     const navigate = useNavigate();
-    const {register, handleSubmit} = useForm();
-
+    const {register, formState: {errors},handleSubmit} = useForm({mode: "all"});
+    
     useEffect(() => {
         const divForm = document.querySelector("#loginUsers");
         divForm.style.display = "block";
@@ -24,7 +24,6 @@ export default function FormIUsuario() {
                 validateUser(data);
                 navigate('/content');
             })();
-            login.reset();
         }
 
         const eventoPassword = () => {
@@ -75,13 +74,39 @@ export default function FormIUsuario() {
                         <label htmlFor="Username" className="label">
                             Username
                         </label>
-                        <input {...register("UsernameI")} type="text" name="UsernameI" id="UsernameI" required/>
+                        <input {...register("UsernameI", {
+                            required: "Username is required", 
+                            minLength: {
+                                value: 3,
+                                message: "Username must be atleast 3 characters long"
+                            },
+                            maxLength: {
+                                value: 100,
+                                message: "Username must be at least 100 characters long"
+                            },
+                            pattern: {
+                                value: /^[A-Za-z0-9-\s.,!]+$/,
+                                message: "Username must be a text without special characters"
+                            }
+                        })} type="text" name="UsernameI" id="UsernameI" required/>
+                        <p className="ErrorMessage">{errors.UsernameI?.message}</p>
                     </span>
                     <span className="input-span">
                         <label htmlFor="password" className="label">
                             Password
                         </label>
-                        <input {...register("passwordI")} type="password" name="passwordI" id="passwordI" required/>
+                        <input {...register("passwordI", {
+                            required: "Password is required", 
+                            minLength: {
+                                value: 5,
+                                message: "Password must be atleast 5 characters long"
+                            },
+                            maxLength: {
+                                value: 80,
+                                message: "Password must be at least 80 characters long"
+                            }
+                        })} type="password" name="passwordI" id="passwordI" required/>
+                        <p className="ErrorMessage">{errors.passwordI?.message}</p>
                     </span>
                     <button type="button" className="button" id="showPasswordButtonI"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
