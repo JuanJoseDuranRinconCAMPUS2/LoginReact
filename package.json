@@ -39,6 +39,7 @@
     "passport": "0.6.0",
     "passport-http-bearer": "1.0.1",
     "prop-types": "15.8.1",
+    "react-hook-form": "7.46.1",
     "vite": "^4.4.5"
   }
 }
