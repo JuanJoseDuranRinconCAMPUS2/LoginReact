@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
 import { Link, Outlet, useOutletContext } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
 import { sendUpdatePassword } from '../js/FormNewPassword';
 import '../css/FormCUsuario.css'
 
 export default function FormNewPassword() {
     let data = useOutletContext();
+    const {register, handleSubmit} = useForm();
     useEffect(() => {
         const formNewPW = document.querySelector(".formNewPW");
         const password = document.querySelector(".password");
@@ -16,9 +18,10 @@ export default function FormNewPassword() {
 
         const eventoSubmit = (e) => {
             e.preventDefault();
-            let dataForm = Object.fromEntries(new FormData(e.target));
-            data = {...data, ...dataForm}
-            sendUpdatePassword(data);
+            handleSubmit((dataForm) => {
+                data = {...data, ...dataForm}
+                sendUpdatePassword(data);
+            })();
             formNewPW.reset();
         }
 
@@ -73,7 +76,7 @@ export default function FormNewPassword() {
         <>
             <div id='validatecodeform'>
                 <h2 className='titleUserR'>password recovery</h2>
-                <form className="formNewPW">
+                <form className="formNewPW" autoComplete='off'>
                     <span className="span">
                         enter the code we have sent to your email or your phone number and the new password for your account
                     </span>
@@ -81,19 +84,19 @@ export default function FormNewPassword() {
                         <label htmlFor="CodePW" className="label">
                             verification code
                         </label>
-                        <input placeholder="Code" className="inputCode" name="CodePW" type="text" maxLength="5"></input>
+                        <input {...register("CodePW")} placeholder="Code" className="inputCode" name="CodePW" type="text" maxLength="5"></input>
                     </span>
                     <span className="input-span">
                         <label htmlFor="Password" className="label">
                             Password
                         </label>
-                        <input type="password" name="Password" className="password" required/>
+                        <input {...register("Password")} type="password" name="Password" className="password" required/>
                     </span>
                     <span className="input-span">
                         <label htmlFor="Cpassword" className="label">
                             confirm password
                         </label>
-                        <input type="password" name="Cpassword" className="Cpassword" required/>
+                        <input {...register("Cpassword")} type="password" name="Cpassword" className="Cpassword" required/>
                     </span>
                     <button type="button" className="button" id="showPasswordButton"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>

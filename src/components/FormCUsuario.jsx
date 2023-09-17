@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
 import { Link, Outlet } from 'react-router-dom'
+import { useForm } from 'react-hook-form';
 import { sendUser } from '../js/FormCUsuario';
 import '../css/FormCUsuario.css'
 
 export default function FormCUsuario() {
+
+    const {register, handleSubmit} = useForm();
 
     useEffect(() => {
         const login = document.querySelector(".form");
@@ -13,8 +16,9 @@ export default function FormCUsuario() {
 
         const eventoSubmit = (e) => {
             e.preventDefault();
-            let data = Object.fromEntries(new FormData(e.target));
-            sendUser(data);
+            handleSubmit((data) => {
+                sendUser(data);
+            })();       
             login.reset();
         }
 
@@ -65,19 +69,19 @@ export default function FormCUsuario() {
                         <label htmlFor="Username" className="label">
                             Username
                         </label>
-                        <input type="Username" name="Username" id="Username" required/>
+                        <input {...register("Username")} type="text" name="Username" id="Username" required/>
                     </span>
                     <span className="input-span">
                         <label htmlFor="email" className="label">
                             Email
                         </label>
-                        <input type="email" name="email" id="email" required/>
+                        <input {...register("email")} type="email" name="email" id="email" required/>
                     </span>
                     <span className="input-span">
                         <label htmlFor="email" className="label">
                             Rol
                         </label>
-                        <select name="rol" id="rol" required>
+                        <select {...register("rol")}  name="rol" id="rol" required>
                             <option value="1">Admin</option>
                             <option value="0">User</option>
                         </select>
@@ -86,7 +90,7 @@ export default function FormCUsuario() {
                         <label htmlFor="password" className="label">
                             Password
                         </label>
-                        <input type="password" name="password" id="password" required/>
+                        <input {...register("password")} type="password" name="password" id="password" required/>
                     </span>
                     <button type="button" className="button" id="showPasswordButton"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>

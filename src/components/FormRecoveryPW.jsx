@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { RecoveryUser } from '../js/FormRecoveryPW';
 import '../css/style.css'
 
@@ -11,6 +12,7 @@ export default function FormRecoveryPW() {
         UsernameR: '',
         emailR: '',
     });
+    const {register, handleSubmit} = useForm();
     useEffect(() => {
 
         const recovery = document.querySelector(".formRecovery");
@@ -18,11 +20,12 @@ export default function FormRecoveryPW() {
 
         const eventoSubmit = (e) => {
             e.preventDefault();
-            let data = Object.fromEntries(new FormData(e.target));
             divPassword.style.display = "none";
-            setFormData(data);
-            RecoveryUser(data);
-            navigate('NewPasswordVerification');
+            handleSubmit((data) => {
+                setFormData(data);
+                RecoveryUser(data);
+                navigate('NewPasswordVerification');
+            })();  
             recovery.reset();
         }
 
@@ -50,13 +53,13 @@ export default function FormRecoveryPW() {
                             <label htmlFor="Username" className="label">
                                 Username
                             </label>
-                            <input type="Username" name="UsernameR" id="UsernameR" required/>
+                            <input {...register("UsernameR")} type="text" name="UsernameR" id="UsernameR" required/>
                         </span>
                         <span className="input-span">
                             <label htmlFor="email" className="label">
                                 Email
                             </label>
-                            <input type="email" name="emailR" id="emailR" required/>
+                            <input {...register("emailR")} type="email" name="emailR" id="emailR" required/>
                         </span>
                         <button className="button" type="submit" value="recovery P"> Send</button>
                         <span className="span">

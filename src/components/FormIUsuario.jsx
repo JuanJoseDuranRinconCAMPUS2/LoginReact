@@ -20,7 +20,7 @@ export default function FormIUsuario() {
         
         const eventoSubmit = (e) => {
             e.preventDefault();
-             handleSubmit((data) => {
+            handleSubmit((data) => {
                 validateUser(data);
                 navigate('/content');
             })();
