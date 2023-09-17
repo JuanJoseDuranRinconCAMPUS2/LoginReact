@@ -2,12 +2,33 @@ import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
 import { Link, Outlet, useOutletContext } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup"
 import { sendUpdatePassword } from '../js/FormNewPassword';
 import '../css/FormCUsuario.css'
 
+const schema = yup.object().shape({
+    CodePW: yup
+        .string()
+        .required("verification code is required")
+        .min(5, "verification code must be at least 5 characters long")
+        .max(5, "verification code must be at most 5 characters long"),
+    Password: yup
+        .string()
+        .required("Password is required")
+        .min(5, "Password must be at least 5 characters long")
+        .max(80, "Password must be at most 80 characters long"),
+    Cpassword: yup
+        .string()
+        .oneOf([yup.ref("Password"), null], "Passwords must match") 
+        .required("Password confirmation is required")
+        .min(5, "Password must be at least 5 characters long")
+        .max(80, "Password must be at most 80 characters long"),
+});
+
 export default function FormNewPassword() {
     let data = useOutletContext();
-    const {register, handleSubmit} = useForm();
+    const {register, formState: {errors}, handleSubmit} = useForm({mode: "all", resolver: yupResolver(schema)});
     useEffect(() => {
         const formNewPW = document.querySelector(".formNewPW");
         const password = document.querySelector(".password");
@@ -86,17 +107,20 @@ export default function FormNewPassword() {
                         </label>
                         <input {...register("CodePW")} placeholder="Code" className="inputCode" name="CodePW" type="text" maxLength="5"></input>
                     </span>
+                    <p className="ErrorMessage">{errors.CodePW?.message}</p>
                     <span className="input-span">
                         <label htmlFor="Password" className="label">
                             Password
                         </label>
                         <input {...register("Password")} type="password" name="Password" className="password" required/>
+                        <p className="ErrorMessage">{errors.Password?.message}</p>
                     </span>
                     <span className="input-span">
                         <label htmlFor="Cpassword" className="label">
                             confirm password
                         </label>
                         <input {...register("Cpassword")} type="password" name="Cpassword" className="Cpassword" required/>
+                        <p className="ErrorMessage">{errors.Cpassword?.message}</p>
                     </span>
                     <button type="button" className="button" id="showPasswordButton"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
