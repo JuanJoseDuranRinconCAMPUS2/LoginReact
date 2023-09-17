@@ -1,14 +1,31 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import * as yup from 'yup';
+import { yupResolver } from "@hookform/resolvers/yup"
 import { validateUser } from '../js/FormIUsuario';
 import { useForm } from 'react-hook-form';
 import '../css/style.css'
 
+const schema = yup.object().shape({
+    UsernameI: yup
+        .string()
+        .required("Username is required")
+        .min(3, "Username must be at least 3 characters long")
+        .max(100, "Username must be at most 100 characters long")
+        .matches(
+            /^[A-Za-z0-9-\s.,!]+$/,
+            "Username must be a text without special characters"),
+    passwordI: yup
+        .string()
+        .required("Password is required")
+        .min(5, "Password must be at least 5 characters long")
+        .max(80, "Password must be at most 80 characters long"),
+});
 
 export default function FormIUsuario() {
     const navigate = useNavigate();
-    const {register, formState: {errors},handleSubmit} = useForm({mode: "all"});
+    const {register, formState: {errors},handleSubmit} = useForm({mode: "all", resolver: yupResolver(schema)});
     
     useEffect(() => {
         const divForm = document.querySelector("#loginUsers");
@@ -74,38 +91,14 @@ export default function FormIUsuario() {
                         <label htmlFor="Username" className="label">
                             Username
                         </label>
-                        <input {...register("UsernameI", {
-                            required: "Username is required", 
-                            minLength: {
-                                value: 3,
-                                message: "Username must be atleast 3 characters long"
-                            },
-                            maxLength: {
-                                value: 100,
-                                message: "Username must be at least 100 characters long"
-                            },
-                            pattern: {
-                                value: /^[A-Za-z0-9-\s.,!]+$/,
-                                message: "Username must be a text without special characters"
-                            }
-                        })} type="text" name="UsernameI" id="UsernameI" required/>
+                        <input {...register("UsernameI")} type="text" name="UsernameI" id="UsernameI" required/>
                         <p className="ErrorMessage">{errors.UsernameI?.message}</p>
                     </span>
                     <span className="input-span">
                         <label htmlFor="password" className="label">
                             Password
                         </label>
-                        <input {...register("passwordI", {
-                            required: "Password is required", 
-                            minLength: {
-                                value: 5,
-                                message: "Password must be atleast 5 characters long"
-                            },
-                            maxLength: {
-                                value: 80,
-                                message: "Password must be at least 80 characters long"
-                            }
-                        })} type="password" name="passwordI" id="passwordI" required/>
+                        <input {...register("passwordI")} type="password" name="passwordI" id="passwordI" required/>
                         <p className="ErrorMessage">{errors.passwordI?.message}</p>
                     </span>
                     <button type="button" className="button" id="showPasswordButtonI"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye-fill" viewBox="0 0 16 16">
