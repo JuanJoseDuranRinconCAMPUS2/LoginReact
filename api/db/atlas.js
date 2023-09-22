@@ -1,9 +1,11 @@
-import dotnev from "dotenv";
+import { loadEnv } from 'vite'
 import { MongoClient } from "mongodb";
-dotnev.config({ path: `./api/.env` });
+
+const env = loadEnv("development", process.cwd(), 'NODE');
+
 export async function con() {
     try {
-        const uri = `mongodb+srv://${process.env.Atlas_User}:${process.env.Atlas_Password}@cluster0.ayssvt3.mongodb.net/${process.env.Atlas_DB}`;
+        const uri = `mongodb+srv://${env.NODE_ATLAS_USER}:${env.NODE_ATLAS_PASSWORD}@cluster0.ayssvt3.mongodb.net/${env.NODE_ATLAS_DB}`;
         const options = {
             useNewUrlParser: true,
             useUnifiedTopology: true,

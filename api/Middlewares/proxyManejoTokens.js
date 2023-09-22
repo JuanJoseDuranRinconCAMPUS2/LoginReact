@@ -1,8 +1,9 @@
 import  express from 'express';
-
+import { loadEnv } from 'vite'
 import { SignJWT, jwtVerify } from 'jose';
 
 const proxyAutorizacionTk = express();
+const env = loadEnv("development", process.cwd(), 'NODE');
 
 proxyAutorizacionTk.use(async(req, res, next)=>{
     const {authorization} = req.headers;
@@ -11,7 +12,7 @@ proxyAutorizacionTk.use(async(req, res, next)=>{
         const encoder = new TextEncoder();
         const jwtData = await jwtVerify(
             authorization,
-            encoder.encode(process.env.Jwt_Primate_Key)
+            encoder.encode(env.NODE_JWT_PRIMATE_KEY)
         );
         req.data = jwtData;
         next();

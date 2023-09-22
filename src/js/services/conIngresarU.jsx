@@ -2,10 +2,7 @@ import axios from "axios";
 import { modalError } from "../ModalCUsuario";
 import { getProducts } from "./conGetProductos";
 
-const config = {"hostname": "127.19.8.7", "port": 5010}
-
-let url = `http://${config.hostname}:${config.port}/IngresarUsuario`
-
+let url = `http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/IngresarUsuario`
 
 export let loginUser = async (User)=>{
     try{

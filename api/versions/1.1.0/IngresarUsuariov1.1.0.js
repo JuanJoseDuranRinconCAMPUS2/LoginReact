@@ -1,6 +1,8 @@
 import { con } from "../../db/atlas.js";
+import { loadEnv } from 'vite'
 import { SignJWT } from 'jose';
 
+const env = loadEnv("development", process.cwd(), 'NODE');
 let db= await con();
 let tokens_Api = db.collection("tokens_Api");
 let usuario = db.collection("usuario_Api");
@@ -18,7 +20,7 @@ export const ingresarUsuv110 = async (req, res) =>{
         .setProtectedHeader({alg:"HS256", typ: "JWT"})
         .setIssuedAt()
         .setExpirationTime("30m")
-        .sign(encoder.encode(process.env.Jwt_Primate_Key));
+        .sign(encoder.encode(env.NODE_JWT_PRIMATE_KEY));
         req.data = jwt;
         let id_usuario_Api = req.usuarioID 
         let tokens = {id_usuario_Api}

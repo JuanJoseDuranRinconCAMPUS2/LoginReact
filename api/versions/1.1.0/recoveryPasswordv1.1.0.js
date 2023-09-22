@@ -1,9 +1,6 @@
 import { con } from "../../db/atlas.js";
 import errorcontroller from "../../Middlewares/ErroresMongo.js"
 
-import dotenv from "dotenv";
-
-dotenv.config({ path: `./api/.env` });
 let db= await con();
 let collection = db.collection("usuario_Api");
 

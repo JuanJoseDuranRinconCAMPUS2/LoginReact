@@ -2,10 +2,7 @@ import axios from "axios";
 import { modalError } from "../ModalCUsuario";
 import { modalSendEmail } from "../ModalCUsuario";
 
-const config = {"hostname": "127.19.8.7", "port": 5010}
-
-let url = `http://${config.hostname}:${config.port}/GeneratePasswordKey`
-
+let url = `http://${import.meta.env.VITE_HOSTNAME}:${import.meta.env.VITE_PORT_BACKEND}/GeneratePasswordKey`
 
 export let GenerateKeyUser = async (User)=>{
     try{

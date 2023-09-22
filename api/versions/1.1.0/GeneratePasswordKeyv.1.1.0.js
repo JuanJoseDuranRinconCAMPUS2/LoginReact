@@ -1,9 +1,9 @@
 import { con } from "../../db/atlas.js";
 import errorcontroller from "../../Middlewares/ErroresMongo.js"
 import nodemailer from "nodemailer";
-import dotenv from "dotenv";
+import { loadEnv } from 'vite'
 
-dotenv.config({ path: `./api/.env` });
+const env = loadEnv("development", process.cwd(), 'NODEEMAIL');
 let db= await con();
 let collection = db.collection("passwordCode");
 
@@ -48,8 +48,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-      user: `${process.env.Nodeemail_Mail_Name}`,
-      pass: `${process.env.Nodeemail_Mail_Password}`     
+      user: `${env.NODEEMAIL_MAIL_NAME}`,
+      pass: `${env.NODEEMAIL_MAIL_PASSWORD}`     
     }
 });
 
@@ -68,7 +68,7 @@ function generateCode() {
 
 async function sendEmail(data){
     const info = await transporter.sendMail({
-        from: `"🧧TiendaGaming🧧" <${process.env.Nodeemail_Mail_Name}>`, 
+        from: `"🧧TiendaGaming🧧" <${env.NODEEMAIL_MAIL_NAME}>`, 
         to: `${data.email}`, 
         subject: `Codigo de Cambio de Contraseña: ${data.name}✔`, 
         text: `${plantillaEmail(data)}`, 

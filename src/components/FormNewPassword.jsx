@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { PropTypes } from 'prop-types';
-import { Link, Outlet, useOutletContext } from 'react-router-dom'
+import { Link, Outlet, useOutletContext, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -27,6 +27,7 @@ const schema = yup.object().shape({
 });
 
 export default function FormNewPassword() {
+    const navigate = useNavigate();
     let data = useOutletContext();
     const {register, formState: {errors}, handleSubmit} = useForm({mode: "all", resolver: yupResolver(schema)});
     useEffect(() => {
@@ -44,6 +45,7 @@ export default function FormNewPassword() {
                 sendUpdatePassword(data);
             })();
             formNewPW.reset();
+            navigate('/');
         }
 
         const showDivPassword = (e) => {
