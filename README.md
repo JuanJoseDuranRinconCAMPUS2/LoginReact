@@ -98,13 +98,45 @@ Antes de ejecutar el código, asegúrate:
          "react-router-dom": "^6.16.0"<br>
      </details>
 
-5. Accede al archivo de "[login_DB.mongodb](https://github.com/JuanJoseDuranRinconCAMPUS2/LoginReact/blob/main/api/db/login_DB.mongodb)" ubicada en la carpeta **db **dentro de api: `login_DB.mongodb`
+4. Accede al archivo de "[login_DB.mongodb](https://github.com/JuanJoseDuranRinconCAMPUS2/LoginReact/blob/main/api/db/login_DB.mongodb)" ubicada en la carpeta **db **dentro de api: `login_DB.mongodb`
 
-6. inicia el archivo y monta la base de datos en tu servidor (ejecuta cada una de los comandos de mongo de manera Descendente).
+5. inicia el archivo y monta la base de datos en tu servidor (ejecuta cada una de los comandos de mongo de manera Descendente).
 
-7. Para facilitar las consultas ejecuta de manera Descendente el archivo del mismo archivo: `Data.mongodb` en ella encontraras data para alimentar la base de datos (!Importante: En este archivo esta la data con los roles y usuarios por defecto, **si no los ejecutas no podrás usar la api**!)(todo esto si quieres correr la base de datos en tu servidor, igualmente en el .env esta las credenciales de mi base de datos para poder usar la api con normalidad)
+6. Para facilitar las consultas ejecuta de manera Descendente el archivo del mismo archivo: `Data.mongodb` en ella encontraras data para alimentar la base de datos (!Importante: En este archivo esta la data con los roles y usuarios por defecto, **si no los ejecutas no podrás usar la api**!)(todo esto si quieres correr la base de datos en tu servidor, igualmente en el .env esta las credenciales de mi base de datos para poder usar la api con normalidad)
 
 7. Recuerda para ejecutar ambos archivos debes tener la extensión de mongo en tu Visual Studio y además haberte conectado
+
+------
+
+## **🏁🎆Configuración**🎆🏁
+
+1. Ubica el archivo  `.env`  en la matriz del proyecto
+
+2. Dentro del archivo `.env`, define las siguientes variables de entorno:
+
+   - VITE_PORT_FRONTEND=5171
+   
+     VITE_PORT_BACKEND=5172
+   
+     VITE_HOSTNAME="127.19.8.7"
+
+     NODE_ATLAS_USER="juanjoseduranrincon404"
+     
+     NODE_ATLAS_PASSWORD="Mgkq49muHOUs00TQ"
+     
+     NODE_ATLAS_DB="login_DB"
+     
+     NODE_JWT_PRIMATE_KEY="Fetch"
+     
+     NODEEMAIL_MAIL_NAME="tiendagaming82@gmail.com"
+     
+     NODEEMAIL_MAIL_PASSWORD="wpsnxrigcgkgyzqr"
+     
+     
+   
+   Reemplaza `NODE_ATLAS_USER`, `NODE_ATLAS_PASSWORD`, y con los datos de tu base de datos de Mongo.
+
+------
 
 ------
 
@@ -135,6 +167,7 @@ Antes de ejecutar el código, asegúrate:
    - Aplicación web: [http://127.19.8.7:5171](http://127.19.8.7:5171/)
    - API del servidor: [http://127.19.8.7:5172](http://127.19.8.7:5172/)
 
+(si estas en el cluster recuerda que la ip cambia a la ip del cluster)
 ------
 
 ## ⛩🔀⛩️Funcionalidades⛩️🔀
@@ -143,6 +176,11 @@ Antes de ejecutar el código, asegúrate:
 - **Inicio de sesión**: Los usuarios pueden iniciar sesión con sus credenciales.
 - **Recuperación de contraseña**: Los usuarios pueden solicitar una recuperación de contraseña por correo electrónico.
 - **Listado de productos**: Los usuarios autenticados pueden ver una lista de productos con sus precios y características.
+
+Usuario por defecto
+
+- Nombre: JuanJose
+- Contraseña: macker123
 
 ------
 
